@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+    
+        <head>
+            <title>TODO supply a title</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="angularjs-1.6.9-dist/css/w3.css">
+            
+            </style>
+            <link rel="stylesheet" href="myM.css" type="text/css"></link>
+            <script src="angularjs-1.6.9-dist/js/angular.min.js"></script>
+            <script src="myUsers.js"></script>
+            
+
+        </head>
+    <body ng-app="myApp" ng-controller="userCtrl"  >
+
+        <div class="w3-container">
+
+            <h3>Моя родина</h3>
+
+            <table class="w3-table w3-bordered w3-border w3-border-blue w3-pale-blue w3-striped w3-center">
+                <tr class="w3-border  w3-yellow w3-border-blue">
+                    <th class="w3-center w3-border w3-border-blue">Редагувати</th>
+                    <th class="w3-center w3-border w3-border-blue">Імя</th>
+                    <th class="w3-center w3-border w3-border-blue">Прізвище</th>
+                    <th class="w3-center w3-border w3-border-blue">Стать</th>
+                    <th class="w3-center">
+                        <button class="w3-btn w3-ripple" ng-click="toggleAgeFilter()">&#9998; Вік</button>
+                    </th>
+                    <th class="w3-center w3-border w3-border-blue">Соц.статус</th>
+                    <th class="w3-center w3-border w3-border-blue">Дата нар.</th>
+                </tr>
+                <tr ng-repeat="user in users |filter: (ageFilterEnabled ? ageFilter : undefined)"  > 
+                    <!--якщо значення перемикача ageFilterEnabled = true тоді працює фільтр ageFilter -->
+                    <td>
+                        <button class="w3-btn w3-ripple" ng-click="editUser (user.id)">&#9998; Редагувати</button>
+                    </td>
+                    <td>{{ user.fName}}</td>
+                    <td>{{ user.lName}}</td>
+                    <td>{{ user.Sex}}</td>
+                    <td>{{ user.Age}}</td>
+                    <td>{{ user.Status}}</td>
+                    <td>{{ user.BirthDate}}</td>
+                </tr>
+              
+            </table>
+            <br>
+            <button class="w3-btn w3-green w3-ripple w3-round-xlarge" ng-click="editUser('new')">&#9998; Внести нові дані</button>
+            <br>
+            <form ng-hide="hideform" name="hideform">
+                <h3 ng-show="edit">Створити нову особу:</h3>
+                <h3 ng-hide="edit">Внести дані:</h3>
+                <label>Імя:</label>
+                <input class="w3-input w3-border" type="text" ng-model="fName" placeholder="Імя" required ng-class="{ 'ng-invalid': hideform.fName.$invalid }">
+
+                <br>
+                <label>Прізвище:</label>
+                <input class="w3-input w3-border" type="text" ng-model="lName" placeholder="Прізвище" ng-minlength="3" ng-maxlength="10" required >
+                <br>
+                <label>Стать:(чол/жін)</label>
+                <input class="w3-input w3-border" type="text" ng-model="Sex" placeholder="Стать" ng-minlength="3" ng-maxlength="3" required>
+                <br>
+                <label>Вік:</label>
+                <input class="w3-input w3-border" type="text" ng-model="Age" placeholder="Вік" required ng-pattern="/^[0-9]{1,2}$/" та min="0" та max="120">
+                <br>
+                <label>Соц.статус:</label>
+                <input class="w3-input w3-border" type="text" ng-model="Status" placeholder="Соц.статус" required>
+                <br>
+                <label>Дата нар.:</label>
+                <input class="w3-input w3-border" type="text" ng-model="BirthDate" placeholder="Дата нар." required>
+                <br>
+                <button class="w3-btn w3-green w3-ripple w3-round-xlarge" ng-click="saveUser()" ng-disabled="error || incomplete">&#10004; Save Changes</button>
+            </form>
+
+        </div>
+
+        <script src= "myUsers.js"></script>
+        
+        
+
+
+    </body>  
+</html>

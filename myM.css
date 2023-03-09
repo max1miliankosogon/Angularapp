@@ -1,0 +1,19 @@
+
+body {
+    background-color: rgb(179, 199, 235);
+}
+
+
+input.ng-invalid {
+    background-color: rgb(239, 200, 207);
+  }
+  input.ng-valid {
+    background-color: rgb(217, 237, 217);
+  }
+
+
+/*.ng-invalid {
+    border-color: red;
+  }*/
+
+  
